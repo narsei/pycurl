@@ -21,10 +21,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macOS-12
-          - os: ubuntu-22.04
-          - os: windows-2022
-            arch: x86
+          # - os: macOS-12
+          # - os: ubuntu-22.04
+          # - os: windows-2022
+          #   arch: x86
           - os: windows-2022
             arch: x64
 
@@ -95,16 +95,16 @@ jobs:
         with:
           path: ./wheelhouse/*.whl
 
-  deploy:
-    runs-on: ubuntu-22.04
-    needs: package-wheel
-    steps:
-      - name: Download distributions
-        uses: actions/download-artifact@v3
-        with:
-          name: artifact
-          path: dist/
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: ${{ github.event.inputs.pypi-env == 'prod' && 'https://upload.pypi.org/legacy/' || 'https://test.pypi.org/legacy/' }}
+  # deploy:
+  #   runs-on: ubuntu-22.04
+  #   needs: package-wheel
+  #   steps:
+  #     - name: Download distributions
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: artifact
+  #         path: dist/
+  #     - name: Publish to PyPI
+  #       uses: pypa/gh-action-pypi-publish@release/v1
+  #       with:
+  #         repository-url: ${{ github.event.inputs.pypi-env == 'prod' && 'https://upload.pypi.org/legacy/' || 'https://test.pypi.org/legacy/' }}
